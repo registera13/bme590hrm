@@ -4,18 +4,15 @@ import matplotlib
 
 
 
-class Person:
+class DataIO:
 
-    def __init__(self, name, surname, birthdate, address, telephone, email):
-        self.name = name
-        self.surname = surname
-        self.birthdate = birthdate
+    def __init__(self, filename, filetype, outputfile):
+        self.filename = filename
+        self.filetype = filetype
+        self.outputfile = outputfile
 
-        self.address = address
-        self.telephone = telephone
-        self.email = email
 
-    def age(self):
+    def __int__(self):
         today = datetime.date.today()
         age = today.year - self.birthdate.year
 
