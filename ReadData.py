@@ -39,19 +39,17 @@ class DataIO:
         if ".csv" not in filename:
             logging.warning('file is not a .csv file')
             raise TypeError("file is not a .csv file")
-        self.data = None
-        self.read_data(self.fullfolderpath)
 
     def read_data(self):
         try:
-            self.filename + 'test'
+            self.fullfolderpath + 'test'
         except TypeError:
             print('Input file name must be a String type')
             logging.warning('Input file entered was not a String type')
             raise TypeError('Input file entered was not a String type')
             return None
         try:
-            pd.read_csv(self.filename)
+            pd.read_csv(self.fullfolderpath)
         except FileNotFoundError:
             print('No file with given filename found')
             logging.debug('No file with given filename found')
@@ -59,7 +57,7 @@ class DataIO:
             return None
 
         headers = ['Time', 'Voltage']
-        df = pd.read_csv(self.filename, names=headers)
+        df = pd.read_csv(self.fullfolderpath, names=headers)
         self.csvDf = df
 
     def extract_data(self):
@@ -74,11 +72,10 @@ class DataIO:
         plt.show()
 
 
-
-
 if __name__ == '__main__':
     Inputdata= DataIO("test_data1.csv")
     Inputdata.read_data()
+    Inputdata.extract_data()
 
 
 
