@@ -1,32 +1,107 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import matplotlib.mlab as mlab
 from scipy import signal
+import math
+
 
 class ECG
-    def __init__(self, time, voltage, hrw, fs):
+    def __init__(self, time, voltage, minvoltage =None, maxvoltage = None):
         # validate data and get time/voltage lists
 
-        self.time= time
-        self.voltage=voltage
+        self.timearray= time
+        self.voltagearray=voltage
         self.hrw = hrw
         self.fs = fs
 
-    def rolmean(self, dataset=self.voltage, hrw=self.hrw, fs=self.fs):
-        mov_avg = dataset['hart'].rolling(int(hrw * fs)).mean()
-        avg_hr = (np.mean(dataset.hart))
-        mov_avg = [avg_hr if math.isnan(x) else x for x in mov_avg]
-        mov_avg = [x * 1.2 for x in mov_avg]
-        dataset['hart_rollingmean'] = mov_avg
+    def autocorr(self):
+        """
+        Compute the autocorrelation of the voltage, based on the properties of the
+        power spectral density of the signal.
+        from: https://stackoverflow.com/questions/643699/how-can-i-use-numpy-correlate-to-do-autocorrelation
+        :return: Autocorrelated dataset
+        """
+        x = self.voltagearray
+        result = (numpy.correlate(x, x, mode='full'))
+        result = result[len(result) // 2:]
+        logger.info('Autocorrelation Successful')
+        return result
 
+    def get_interval(self):
+        """
+        Using autocorr() to find the length of the peak to peak R-wave interval
+        See https://www.mathworks.com/help/signal/ug/find-periodicity-using-autocorrelation.html
+        for detail
+        :return: time in seconds of the R to R peak
+        """
+        data = self.autocorrelate()
+        data = data ** 2
+        peaks_indices = scipy.signal.find_peaks_cwt(data, numpy.arange(5, 10),min_snr=2)
+        # create array to store the indices
+        max_values = []
+        for n, i in enumerate(peaks_indices):
+            max_values.append(data[i])
+        interval_time_index = peaks_indices[1]
+        interval = self.timevals[interval_time_index]
+        logger.info('get autocorr interval successful')
+        return interval
+    def count_beats(self):
+        interval_sec = self.get_interval()
+        interval_indices = self.timearray.index(interval_sec)
+        num_intervals = int(max(self.timearray) / interval_sec)
 
-    def find_peaks(self):
+        # Create interval "search bins" in which to find local peaks
+        bin_ends = []
+        for i in range(1, num_intervals + 1):
+            bin_ends.append((i * interval_indices) - 1)
+        bin_ends.append(len(self.voltagearray))
+        start = 0
+        peak_val = []
+        peak_val_index = []
+
+        for n, i in enumerate(bin_ends):
+            bin = self.voltagearray[start:i]
+            peak_val.append(max(bin))
+            peak_val_location = start + bin.index(peak_val[n])
+            peak_val_index.append(peak_val_location)
+            start = i + 1
+
+        peak_val_times = []
+        for i in peak_val_index:
+            peak_val_times.append(self.timearray[i])
+
+        # Collect Desired Values
+        num_beats = len(peak_val)
+        beats = numpy.array(peak_val_times)
+        self.num_beats = num_beats
+        self.beat_times = beats
+        return num_beats, beats
+
+def find_peaks(self, dataset):
         """Locates the S wave peak in the signal
             1st) filter signal using a a bandpass filter
 
         :return: array with approximate locations of beats given as indices of the time array
         """
-
+        window = []
+        peaklist = []
+        listpos = 0
+        for datapoint in dataset.hart:
+            rollingmean = dataset.hart_rollingmean[listpos]
+            if (datapoint < rollingmean) and (len(window) < 1):
+                listpos += 1
+            elif (datapoint > rollingmean):
+                window.append(datapoint)
+                listpos += 1
+            else:
+                maximum = max(window)
+                beatposition = listpos - len(window) + (window.index(max(window)))
+                peaklist.append(beatposition)
+                window = []
+                listpos += 1
+        measures['peaklist'] = peaklist
+        measures['ybeat'] = [dataset.hart[x] for x in peaklist]
 
         return peaks
 
@@ -124,11 +199,3 @@ class ECG
             f.write(json_with_data)
 
         self.logger.info('Data saved to {}.'.format(file_path))
-
-
-    def bandpass(self,start,stop):
-        bp_Hz = np.zeros(0)
-        bp_Hz = np.array([start,stop])
-        b, a = signal.butter(3, bp_Hz/(self.fs_Hz / 2.0),'bandpass')
-        print("Bandpass filtering to: " + str(bp_Hz[0]) + "-" + str(bp_Hz[1]) + " Hz")
-        return signal.lfilter(b, a, self.data, 0)
