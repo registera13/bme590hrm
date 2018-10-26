@@ -1,3 +1,3 @@
-INFO 10/26/2018 07:16:20 PM Autocorrelation Successful
-INFO 10/26/2018 07:16:20 PM get autocorr interval successful
-INFO 10/26/2018 07:16:20 PM Calculated data written to test_data13.csv.json
+INFO 10/26/2018 07:19:11 PM Autocorrelation Successful
+INFO 10/26/2018 07:19:11 PM get autocorr interval successful
+INFO 10/26/2018 07:19:11 PM Calculated data written to test_data13.csv.json
