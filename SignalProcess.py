@@ -28,7 +28,7 @@ logger = logging.getLogger()
 class ECG:
     def __init__(self, time, voltage, minvoltage=None, maxvoltage=None,
                 num_beats=None, beat_times=None,
-                duration=None, mean_hr_bpm=None):
+                duration=None, mean_hr=None):
         # validate data and get time/voltage lists
 
         self.timearray = time
@@ -38,7 +38,7 @@ class ECG:
         self.num_beats = num_beats
         self.beat_times = beat_times
         self.duration = duration
-        self.mean_hr_bpm = mean_hr_bpm
+        self.mean_hr = mean_hr
 
     def get_duration(self):
         """Calculates the duration of the ECG signal
@@ -135,7 +135,7 @@ class ECG:
         avg_bps = self.num_beats / self.duration
         # convert sec to min
         avg_bpm = int(avg_bps * 60)
-        self.mean_hr_bpm = avg_bpm
+        self.mean_hr = avg_bpm
         return avg_bpm
 
     def write_json(self, dictionary, path = None , filename = 'data1'):
