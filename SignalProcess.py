@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy
-import pandas as pd
+import scipy.signal
+import json
 import matplotlib.mlab as mlab
-from scipy import signal
+
 import math
 
 import logging
@@ -12,7 +13,7 @@ logging.basicConfig(filename='divlog.txt', format=log_format,
                     filemode='w')
 logger = logging.getLogger()
 
-class ECG
+class ECG:
     def __init__(self, time, voltage, minvoltage =None, maxvoltage = None,
                 num_beats = None, beat_times = None,
                 duration = None, mean_hr_bpm = None):
