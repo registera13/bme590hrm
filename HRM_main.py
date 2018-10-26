@@ -21,8 +21,9 @@ def main(filename):
                    "Beat Times": str(beats)}
     dataset.write_json(ecg_outputs, inputdata.ospath, inputdata.filename)
 
+
 if __name__ == '__main__':
-    main(filename)
+    main("test_data1.csv")
 
 
 

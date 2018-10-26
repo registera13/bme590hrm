@@ -1,12 +1,23 @@
-import matplotlib.pyplot as plt
-import numpy
+try:
+    import pandas as pd
+except ImportError:
+    print('Could not import pandas')
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    print('Could not import matplot')
+try:
+    import numpy
+except ImportError:
+    print('Could not import numpy')
+try:
+    import logging
+except ImportError:
+    print('Could not import logging')
+
 import scipy.signal
-import json
-import matplotlib.mlab as mlab
-
-import math
-
 import logging
+
 log_format = '%(levelname)s %(asctime)s %(message)s'
 logging.basicConfig(filename='divlog.txt', format=log_format,
                     datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,
@@ -68,23 +79,29 @@ class ECG:
         for detail
         :return: time in seconds of the R to R peak
         """
-        data = self.autocorrelate()
+        data = self.autocorr()
         data = data ** 2
-        peaks_indices = scipy.signal.find_peaks_cwt(data, numpy.arange(5, 10),min_snr=2)
+        peaks_indices = scipy.signal.find_peaks_cwt(data, numpy.arange(5, 10), min_snr=2)
         # create array to store the indices
         max_values = []
         for n, i in enumerate(peaks_indices):
             max_values.append(data[i])
         interval_time_index = peaks_indices[1]
-        interval = self.timevals[interval_time_index]
+        interval = self.timearray[interval_time_index]
         logger.info('get autocorr interval successful')
         return interval
+
     def count_beats(self):
+        """
+        Find the Number of beats using the given interval calculated from get_interval()
+        method used from http://greenteapress.com/thinkdsp/html/thinkdsp006.html
+        and https://stackoverflow.com/questions/3684484/peak-detection-in-a-2d-array
+        :return: times when the beats occurred
+        """
         interval_sec = self.get_interval()
         interval_indices = self.timearray.index(interval_sec)
         num_intervals = int(max(self.timearray) / interval_sec)
 
-        # Create interval "search bins" in which to find local peaks
         bin_ends = []
         for i in range(1, num_intervals + 1):
             bin_ends.append((i * interval_indices) - 1)
@@ -94,9 +111,9 @@ class ECG:
         peak_val_index = []
 
         for n, i in enumerate(bin_ends):
-            bin = self.voltagearray[start:i]
-            peak_val.append(max(bin))
-            peak_val_location = start + bin.index(peak_val[n])
+            bins = self.voltagearray[start:i]
+            peak_val.append(max(bins))
+            peak_val_location = start + bins.index(peak_val[n])
             peak_val_index.append(peak_val_location)
             start = i + 1
 
@@ -116,7 +133,7 @@ class ECG:
         :returns: avg_hr_bpm: calculated heart rate in beats per minute
         """
         avg_bps = self.num_beats / self.duration
-        #convert sec to min
+        # convert sec to min
         avg_bpm = int(avg_bps * 60)
         self.mean_hr_bpm = avg_bpm
         return avg_bpm
@@ -134,3 +151,4 @@ class ECG:
         with open(path + filename + '.json', 'w') as outfile:
             json.dump(dictionary, outfile)
         logger.info('Calculated data written to %s' % filename + '.json')
+
