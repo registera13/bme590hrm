@@ -15,6 +15,7 @@ try:
     import logging
 except ImportError:
     print('Could not import logging')
+import csv
 
 class DataIO:
 
@@ -56,16 +57,16 @@ class DataIO:
             raise FileNotFoundError('No file with given filename found')
             return None
 
-        headers = ['Time', 'Voltage']
-        df = pd.read_csv(self.fullfolderpath, names=headers)
-        self.csvDf = df
+        with open(self.fullfolderpath, 'r') as my_data:
+            csv_reader = csv.reader(my_data, delimiter=',')
+            time = []
+            voltage = []
+            for n, reading in enumerate(csv_reader):
+                time.append(float(reading[0]))
+                voltage.append(float(reading[1]))
+            self.time = time
+            self.voltage =voltage
 
-    def extract_data(self):
-        tempVolt = pd.to_numeric(self.csvDf.Voltage, errors='coerce')
-        tempTime = pd.to_numeric(self.csvDf.Time, errors='coerce')
-
-        self.volt = pd.DataFrame(tempVolt).interpolate().values.ravel().tolist()
-        self.times = pd.DataFrame(tempTime).interpolate().values.ravel().tolist()
 
         #plt.title("CVS Heart Rate Signal")
         #plt.plot(tempTime,tempVolt)
@@ -75,7 +76,9 @@ class DataIO:
 if __name__ == '__main__':
     Inputdata= DataIO("test_data1.csv")
     Inputdata.read_data()
-    Inputdata.extract_data()
+    #print(Inputdata.time)
+    #print(Inputdata.voltage)
+
 
 
 
