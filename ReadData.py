@@ -67,9 +67,9 @@ class DataIO:
         self.volt = pd.DataFrame(tempVolt).interpolate().values.ravel().tolist()
         self.times = pd.DataFrame(tempTime).interpolate().values.ravel().tolist()
 
-        plt.title("CVS Heart Rate Signal")
-        plt.plot(tempTime,tempVolt)
-        plt.show()
+        #plt.title("CVS Heart Rate Signal")
+        #plt.plot(tempTime,tempVolt)
+        #plt.show()
 
 
 if __name__ == '__main__':
