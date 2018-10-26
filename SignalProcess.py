@@ -3,29 +3,86 @@ import numpy as np
 import matplotlib.mlab as mlab
 from scipy import signal
 
-class ECGProcess
-    def __init__(self, file_path, time_units=1, voltage_units=1, window_size=10):
+class ECG
+    def __init__(self, time, voltage, hrw, fs):
         # validate data and get time/voltage lists
 
-        self.time_units = time_units
-        self.voltage_units = voltage_units
-        (self.time, self.voltage) = self.parse_data(self.data)
-        # determine basic attributes
-        self.voltage_extremes = self.get_voltage_extremes()
-        self.duration = self.get_duration()
-        # first get interval over entire signal
-        (self.peak_interval, self.interval_loc) = self.get_peak_interval(self.voltage)
-        # then, get the heart rate over pre-specified chunks of time
-        self.mean_hr_bpm = self.get_mean_hr(window_size)
-        # beat position attributes
-        self.peaks = self.locate_peaks()
-        self.beats = np.empty(shape=(0, 0))
-        if (self.peaks.size > 0):
-            self.beats = self.time[self.peaks]
-        self.num_beats = self.beats.size
-        # export data
-        self.export_JSON('{}.json'.format(self.path))
-        self.logger.info('HRMonitor object created.')
+        self.time= time
+        self.voltage=voltage
+        self.hrw = hrw
+        self.fs = fs
+
+    def rolmean(self, dataset=self.voltage, hrw=self.hrw, fs=self.fs):
+        mov_avg = dataset['hart'].rolling(int(hrw * fs)).mean()
+        avg_hr = (np.mean(dataset.hart))
+        mov_avg = [avg_hr if math.isnan(x) else x for x in mov_avg]
+        mov_avg = [x * 1.2 for x in mov_avg]
+        dataset['hart_rollingmean'] = mov_avg
+
+
+    def find_peaks(self):
+        """Locates the S wave peak in the signal
+            1st) filter signal using a a bandpass filter
+
+        :return: array with approximate locations of beats given as indices of the time array
+        """
+
+
+        return peaks
+
+    def get_peak_interval(self, data):
+        """Determines interval between peaks using auto-correlation
+
+        :param data: data interval to process into heart
+        :return: tuple containing (interval size between ECG peaks in seconds, array index of interval location)
+        """
+        self.logger.info('Calculating interval between peaks...')
+        # calculate autocorrelation and square the data
+        raw_corrl = np.correlate(data, data, mode='full')
+        correl = raw_corrl[raw_corrl.size // 2:]
+        sq_cor = np.square(correl)
+
+        # find position after first peak (DC)
+        after_peak = 0
+        prev = sq_cor[0]
+        for i in range(sq_cor.size):
+            if (sq_cor[i] <= prev):
+                after_peak = i
+                prev = sq_cor[i]
+            else:
+                break
+
+        # find position of 2nd peak to get interval between peaks
+        interval_loc = after_peak + np.argmax(sq_cor[after_peak:], axis=0)
+        interval_val = self.time[interval_loc]
+        self.logger.info('Interval between peaks is {}.'.format(interval_val))
+        return (interval_val, interval_loc)
+
+    def get_mean_hr(self, window_size):
+        """Determines heart rate (bpm) for block chunks
+
+        :param window_size: size of window to determine heart rate for
+        :return: numpy vector of heart rate for each block interval
+        """
+
+        self.logger.info('Calculating mean heart rate...')
+        heart_rates = []
+        prev_index = 0
+        prev_time = self.time[prev_index]
+        for i, time in enumerate(self.time):
+            if (time >= window_size + prev_time or i == len(self.time) - 1):
+                (int_val, int_loc) = self.get_peak_interval(
+                    self.voltage[prev_index:i])
+
+                heart_rate = (60 / int_val).round(5)
+                heart_rates.append(heart_rate)
+
+                prev_index = i
+                prev_time = time
+
+        self.logger.info(
+            'Heart rates determined for {} blocks'.format(len(heart_rates)))
+        return np.asarray(heart_rates)
 
     def get_duration(self):
         """Calculates the duration of the ECG signal
