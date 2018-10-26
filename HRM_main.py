@@ -1,18 +1,32 @@
 from ReadData import DataIO
-import HRM_SignalProcess as hb
+from SignalProcess import ECG
+
+
+def main(filename):
+    # read and export data to array
+    inputdata = DataIO(filename)
+    inputdata.read_data()
+    # import data into signal process
+    dataset = ECG(inputdata.time, inputdata.voltage)
+    num_beats, beats = dataset.count_beats()
+    voltage_extremes = dataset.get_voltage_extremes()
+    time_duration = dataset.get_duration()
+    avg_hr_bpm = dataset.mean_heart_rate()
+
+    ecg_outputs = {"Mean Heart Rate BPM": avg_hr_bpm,
+                   "Minimum Voltage": voltage_extremes[0],
+                   "Maximum Voltage": voltage_extremes[1],
+                   "Duration": time_duration,
+                   "Number of Beats": num_beats,
+                   "Beats": str(beats)}
+    dataset.write_json(ecg_outputs, inputdata.filename)
+
+    print(inputdata.ospath)
+    print(inputdata.filename)
+
 
 if __name__ == '__main__':
-    Inputdata= DataIO("test_data1.csv")
-    Inputdata.read_data()
-    Inputdata.extract_data()
-    hb.process(Inputdata.volt, 0.75, 333)
-    # We have imported our Python module as an object called 'hb'
-    # This object contains the dictionary 'measures' with all values in it
-    # Now we can also retrieve the BPM value (and later other values) like this:
-    bpm = hb.measures['bpm']
-    # To view all objects in the dictionary, use "keys()" like so:
-    print
-    hb.measures.keys()
+    main("test_data13.csv")
 
 
 

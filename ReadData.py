@@ -11,11 +11,15 @@ try:
     import numpy as np
 except ImportError:
     print('Could not import numpy')
-try:
-    import logging
-except ImportError:
-    print('Could not import logging')
 import csv
+
+import logging
+log_format = '%(levelname)s %(asctime)s %(message)s'
+logging.basicConfig(filename='LOG_DataIO.txt', format=log_format,
+                    datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,
+                    filemode='w')
+logging = logging.getLogger()
+
 
 class DataIO:
 
@@ -28,9 +32,6 @@ class DataIO:
         self.cvsName = filename
         self.csvDf = None
 
-        logging.basicConfig(filename="DataIO_log.txt",
-                            format='%(asctime)s %(message)s',
-                            datefmt='%m/%d/%Y %I:%M:%S %p')
         if not self:
             logging.warning('filename is empty')
             raise ValueError("filename is empty")
@@ -66,6 +67,7 @@ class DataIO:
                 voltage.append(float(reading[1]))
             self.time = time
             self.voltage =voltage
+            logging.info('Reading of %s' % self.filename + 'was successful from %s' + self.fullfolderpath)
 
 
         #plt.title("CVS Heart Rate Signal")

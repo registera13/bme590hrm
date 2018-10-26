@@ -1,32 +1,54 @@
-import matplotlib.pyplot as plt
-import numpy
+try:
+    import pandas as pd
+except ImportError:
+    print('Could not import pandas')
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    print('Could not import matplot')
+try:
+    import numpy
+except ImportError:
+    print('Could not import numpy')
+try:
+    import logging
+except ImportError:
+    print('Could not import logging')
+
 import scipy.signal
-import json
-import matplotlib.mlab as mlab
-
-import math
-
 import logging
+
 log_format = '%(levelname)s %(asctime)s %(message)s'
-logging.basicConfig(filename='divlog.txt', format=log_format,
+logging.basicConfig(filename='LOG_ECG.txt', format=log_format,
                     datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,
                     filemode='w')
 logger = logging.getLogger()
 
+
 class ECG:
-    def __init__(self, time, voltage, minvoltage =None, maxvoltage = None,
-                num_beats = None, beat_times = None,
-                duration = None, mean_hr_bpm = None):
+    """
+    ECG data signal processing class contain
+    get_duration: find 1st and last time array and calculate difference
+    get_voltage_extreme: Calculate the Max and Min of the input voltage
+    get_interval: interval between beats
+    autocorr: autocorrelation
+    countbeats: count the number of beats
+    mean_hr: mean heart rate
+    write_json: Write a Dictionary to Json
+    """
+    def __init__(self, time, voltage, minvoltage=None, maxvoltage=None,
+                num_beats=None, beat_times=None,
+                duration=None, mean_hr=None):
         # validate data and get time/voltage lists
 
-        self.timearray= time
-        self.voltagearray=voltage
+        self.timearray = time
+        self.voltagearray = voltage
         self.minvoltage = minvoltage
         self.maxvoltage = maxvoltage
         self.num_beats = num_beats
         self.beat_times = beat_times
         self.duration = duration
-        self.mean_hr_bpm = mean_hr_bpm
+        self.mean_hr = mean_hr
 
     def get_duration(self):
         """Calculates the duration of the ECG signal
@@ -34,7 +56,7 @@ class ECG:
         :return: difference between the first and last time value
         """
         duration = self.timearray[-1] - self.timearray[0]
-        self.duration=duration
+        self.duration = duration
         return duration
 
     def get_voltage_extremes(self):
@@ -67,23 +89,29 @@ class ECG:
         for detail
         :return: time in seconds of the R to R peak
         """
-        data = self.autocorrelate()
+        data = self.autocorr()
         data = data ** 2
-        peaks_indices = scipy.signal.find_peaks_cwt(data, numpy.arange(5, 10),min_snr=2)
+        peaks_indices = scipy.signal.find_peaks_cwt(data, numpy.arange(5, 10), min_snr=2)
         # create array to store the indices
         max_values = []
         for n, i in enumerate(peaks_indices):
             max_values.append(data[i])
         interval_time_index = peaks_indices[1]
-        interval = self.timevals[interval_time_index]
+        interval = self.timearray[interval_time_index]
         logger.info('get autocorr interval successful')
         return interval
+
     def count_beats(self):
+        """
+        Find the Number of beats using the given interval calculated from get_interval()
+        method used from http://greenteapress.com/thinkdsp/html/thinkdsp006.html
+        and https://stackoverflow.com/questions/3684484/peak-detection-in-a-2d-array
+        :return: times when the beats occurred
+        """
         interval_sec = self.get_interval()
         interval_indices = self.timearray.index(interval_sec)
         num_intervals = int(max(self.timearray) / interval_sec)
 
-        # Create interval "search bins" in which to find local peaks
         bin_ends = []
         for i in range(1, num_intervals + 1):
             bin_ends.append((i * interval_indices) - 1)
@@ -93,9 +121,9 @@ class ECG:
         peak_val_index = []
 
         for n, i in enumerate(bin_ends):
-            bin = self.voltagearray[start:i]
-            peak_val.append(max(bin))
-            peak_val_location = start + bin.index(peak_val[n])
+            bins = self.voltagearray[start:i]
+            peak_val.append(max(bins))
+            peak_val_location = start + bins.index(peak_val[n])
             peak_val_index.append(peak_val_location)
             start = i + 1
 
@@ -110,35 +138,27 @@ class ECG:
         self.beat_times = beats
         return num_beats, beats
 
-    def get_mean_hr_bpm(self):
+    def mean_heart_rate(self):
         """ Calculates heart rate of the sample data in BPM
         :returns: avg_hr_bpm: calculated heart rate in beats per minute
         """
         avg_bps = self.num_beats / self.duration
-        #convert sec to min
+        # convert sec to min
         avg_bpm = int(avg_bps * 60)
-        self.mean_hr_bpm = avg_bpm
+        self.mean_hr = avg_bpm
         return avg_bpm
 
-    def export_JSON(self, file_path):
-        """Exports calculated attributes to a json file
+    def write_json(self, dictionary, filename):
+        """ Writes data outputs to json files using
+            https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
+        :param: dictionary: dictionary containing the data to be written
+                to a json file
+                path: path to the file to be written
+                filename: name of the file in string, should be the input filename
+        :returns: json file with the same name as the input file"""
 
-        :param file_path: json file path to export to
-        """
-        # first, create a dict with the attributes
-        dict_with_data = {
-            'peak_interval': round(self.peak_interval, 3),
-            'mean_hr_bpm': self.mean_hr_bpm.tolist(),
-            'voltage_extremes': self.voltage_extremes,
-            'duration': self.duration,
-            'num_beats': self.num_beats,
-            'beats': self.beats.tolist(),
-        }
+        import json
+        with open(filename.replace('.csv', '.json'), 'w') as outfile:
+            json.dump(dictionary, outfile)
+        logger.info('Calculated data written to %s' % filename + '.json')
 
-        # convert dict to json, and write it to file
-        self.logger.info('Saving data to JSON file...')
-        json_with_data = json.dumps(dict_with_data, sort_keys=False)
-        with open(file_path, 'w') as f:
-            f.write(json_with_data)
-
-        self.logger.info('Data saved to {}.'.format(file_path))
