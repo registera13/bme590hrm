@@ -19,13 +19,23 @@ import scipy.signal
 import logging
 
 log_format = '%(levelname)s %(asctime)s %(message)s'
-logging.basicConfig(filename='divlog.txt', format=log_format,
+logging.basicConfig(filename='LOG_ECG.txt', format=log_format,
                     datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,
                     filemode='w')
 logger = logging.getLogger()
 
 
 class ECG:
+    """
+    ECG data signal processing class contain
+    get_duration: find 1st and last time array and calculate difference
+    get_voltage_extreme: Calculate the Max and Min of the input voltage
+    get_interval: interval between beats
+    autocorr: autocorrelation
+    countbeats: count the number of beats
+    mean_hr: mean heart rate
+    write_json: Write a Dictionary to Json
+    """
     def __init__(self, time, voltage, minvoltage=None, maxvoltage=None,
                 num_beats=None, beat_times=None,
                 duration=None, mean_hr=None):
