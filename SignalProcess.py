@@ -1,19 +1,50 @@
 import matplotlib.pyplot as plt
-import numpy as np
+import numpy
 import pandas as pd
 import matplotlib.mlab as mlab
 from scipy import signal
 import math
 
+import logging
+log_format = '%(levelname)s %(asctime)s %(message)s'
+logging.basicConfig(filename='divlog.txt', format=log_format,
+                    datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,
+                    filemode='w')
+logger = logging.getLogger()
 
 class ECG
-    def __init__(self, time, voltage, minvoltage =None, maxvoltage = None):
+    def __init__(self, time, voltage, minvoltage =None, maxvoltage = None,
+                num_beats = None, beat_times = None,
+                duration = None, mean_hr_bpm = None):
         # validate data and get time/voltage lists
 
         self.timearray= time
         self.voltagearray=voltage
-        self.hrw = hrw
-        self.fs = fs
+        self.minvoltage = minvoltage
+        self.maxvoltage = maxvoltage
+        self.num_beats = num_beats
+        self.beat_times = beat_times
+        self.duration = duration
+        self.mean_hr_bpm = mean_hr_bpm
+
+    def get_duration(self):
+        """Calculates the duration of the ECG signal
+
+        :return: difference between the first and last time value
+        """
+        duration = self.timearray[-1] - self.timearray[0]
+        self.duration=duration
+        return duration
+
+    def get_voltage_extremes(self):
+        """
+        Calculate the Max and Min of the input voltage
+        :return: (min,max) values
+        """
+        self.minvoltage = min(self.voltagearray)
+        self.maxvoltage = max(self.voltagearray)
+        extremes = (min(self.voltagearray), max(self.voltagearray))
+        return extremes
 
     def autocorr(self):
         """
@@ -78,104 +109,15 @@ class ECG
         self.beat_times = beats
         return num_beats, beats
 
-def find_peaks(self, dataset):
-        """Locates the S wave peak in the signal
-            1st) filter signal using a a bandpass filter
-
-        :return: array with approximate locations of beats given as indices of the time array
+    def get_mean_hr_bpm(self):
+        """ Calculates heart rate of the sample data in BPM
+        :returns: avg_hr_bpm: calculated heart rate in beats per minute
         """
-        window = []
-        peaklist = []
-        listpos = 0
-        for datapoint in dataset.hart:
-            rollingmean = dataset.hart_rollingmean[listpos]
-            if (datapoint < rollingmean) and (len(window) < 1):
-                listpos += 1
-            elif (datapoint > rollingmean):
-                window.append(datapoint)
-                listpos += 1
-            else:
-                maximum = max(window)
-                beatposition = listpos - len(window) + (window.index(max(window)))
-                peaklist.append(beatposition)
-                window = []
-                listpos += 1
-        measures['peaklist'] = peaklist
-        measures['ybeat'] = [dataset.hart[x] for x in peaklist]
-
-        return peaks
-
-    def get_peak_interval(self, data):
-        """Determines interval between peaks using auto-correlation
-
-        :param data: data interval to process into heart
-        :return: tuple containing (interval size between ECG peaks in seconds, array index of interval location)
-        """
-        self.logger.info('Calculating interval between peaks...')
-        # calculate autocorrelation and square the data
-        raw_corrl = np.correlate(data, data, mode='full')
-        correl = raw_corrl[raw_corrl.size // 2:]
-        sq_cor = np.square(correl)
-
-        # find position after first peak (DC)
-        after_peak = 0
-        prev = sq_cor[0]
-        for i in range(sq_cor.size):
-            if (sq_cor[i] <= prev):
-                after_peak = i
-                prev = sq_cor[i]
-            else:
-                break
-
-        # find position of 2nd peak to get interval between peaks
-        interval_loc = after_peak + np.argmax(sq_cor[after_peak:], axis=0)
-        interval_val = self.time[interval_loc]
-        self.logger.info('Interval between peaks is {}.'.format(interval_val))
-        return (interval_val, interval_loc)
-
-    def get_mean_hr(self, window_size):
-        """Determines heart rate (bpm) for block chunks
-
-        :param window_size: size of window to determine heart rate for
-        :return: numpy vector of heart rate for each block interval
-        """
-
-        self.logger.info('Calculating mean heart rate...')
-        heart_rates = []
-        prev_index = 0
-        prev_time = self.time[prev_index]
-        for i, time in enumerate(self.time):
-            if (time >= window_size + prev_time or i == len(self.time) - 1):
-                (int_val, int_loc) = self.get_peak_interval(
-                    self.voltage[prev_index:i])
-
-                heart_rate = (60 / int_val).round(5)
-                heart_rates.append(heart_rate)
-
-                prev_index = i
-                prev_time = time
-
-        self.logger.info(
-            'Heart rates determined for {} blocks'.format(len(heart_rates)))
-        return np.asarray(heart_rates)
-
-    def get_duration(self):
-        """Calculates the duration of the ECG signal
-
-        :return: difference between the first and last time value
-        """
-        duration = self.time[-1] - self.time[0]
-        return duration
-
-    def get_voltage_extremes(self):
-        """
-        Calculate the Max and Min of the input voltage
-        :return: (min,max) vaulues
-        """
-        extremes = (min(self.voltage), max(self.voltage))
-        return extremes
-
-
+        avg_bps = self.num_beats / self.duration
+        #convert sec to min
+        avg_bpm = int(avg_bps * 60)
+        self.mean_hr_bpm = avg_bpm
+        return avg_bpm
 
     def export_JSON(self, file_path):
         """Exports calculated attributes to a json file
