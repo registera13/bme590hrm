@@ -138,7 +138,7 @@ class ECG:
         self.mean_hr = avg_bpm
         return avg_bpm
 
-    def write_json(self, dictionary, path=None , filename='data1'):
+    def write_json(self, dictionary, filename):
         """ Writes data outputs to json files using
             https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
         :param: dictionary: dictionary containing the data to be written
@@ -148,7 +148,7 @@ class ECG:
         :returns: json file with the same name as the input file"""
 
         import json
-        with open(path + filename + '.json', 'w') as outfile:
+        with open(filename.replace('.csv', '.json'), 'w') as outfile:
             json.dump(dictionary, outfile)
         logger.info('Calculated data written to %s' % filename + '.json')
 

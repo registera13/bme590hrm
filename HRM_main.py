@@ -14,18 +14,19 @@ def main(filename):
     avg_hr_bpm = dataset.mean_heart_rate()
 
     ecg_outputs = {"Mean Heart Rate BPM": avg_hr_bpm,
-                   "Minimum Voltage (%s)": voltage_extremes[0],
-                   "Maximum Voltage (%s)": voltage_extremes[1],
-                   "Duration of Reading": time_duration,
+                   "Minimum Voltage": voltage_extremes[0],
+                   "Maximum Voltage": voltage_extremes[1],
+                   "Duration": time_duration,
                    "Number of Beats": num_beats,
-                   "Beat Times": str(beats)}
-    dataset.write_json(ecg_outputs, inputdata.ospath, inputdata.filename)
+                   "Beats": str(beats)}
+    dataset.write_json(ecg_outputs, inputdata.filename)
 
-    print(ecg_outputs)
+    print(inputdata.ospath)
+    print(inputdata.filename)
 
 
 if __name__ == '__main__':
-    main("test_data1.csv")
+    main("test_data13.csv")
 
 
 
