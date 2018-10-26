@@ -13,14 +13,15 @@ logging.basicConfig(filename='divlog.txt', format=log_format,
                     filemode='w')
 logger = logging.getLogger()
 
+
 class ECG:
-    def __init__(self, time, voltage, minvoltage =None, maxvoltage = None,
-                num_beats = None, beat_times = None,
-                duration = None, mean_hr_bpm = None):
+    def __init__(self, time, voltage, minvoltage=None, maxvoltage=None,
+                num_beats=None, beat_times=None,
+                duration=None, mean_hr_bpm=None):
         # validate data and get time/voltage lists
 
-        self.timearray= time
-        self.voltagearray=voltage
+        self.timearray = time
+        self.voltagearray = voltage
         self.minvoltage = minvoltage
         self.maxvoltage = maxvoltage
         self.num_beats = num_beats
@@ -34,7 +35,7 @@ class ECG:
         :return: difference between the first and last time value
         """
         duration = self.timearray[-1] - self.timearray[0]
-        self.duration=duration
+        self.duration = duration
         return duration
 
     def get_voltage_extremes(self):
@@ -110,7 +111,7 @@ class ECG:
         self.beat_times = beats
         return num_beats, beats
 
-    def get_mean_hr_bpm(self):
+    def mean_heart_rate(self):
         """ Calculates heart rate of the sample data in BPM
         :returns: avg_hr_bpm: calculated heart rate in beats per minute
         """
@@ -120,25 +121,16 @@ class ECG:
         self.mean_hr_bpm = avg_bpm
         return avg_bpm
 
-    def export_JSON(self, file_path):
-        """Exports calculated attributes to a json file
+    def write_json(self, dictionary, path = None , filename = 'data1'):
+        """ Writes data outputs to json files using
+            https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
+        :param: dictionary: dictionary containing the data to be written
+                to a json file
+                path: path to the file to be written
+                filename: name of the file in string, should be the input filename
+        :returns: json file with the same name as the input file"""
 
-        :param file_path: json file path to export to
-        """
-        # first, create a dict with the attributes
-        dict_with_data = {
-            'peak_interval': round(self.peak_interval, 3),
-            'mean_hr_bpm': self.mean_hr_bpm.tolist(),
-            'voltage_extremes': self.voltage_extremes,
-            'duration': self.duration,
-            'num_beats': self.num_beats,
-            'beats': self.beats.tolist(),
-        }
-
-        # convert dict to json, and write it to file
-        self.logger.info('Saving data to JSON file...')
-        json_with_data = json.dumps(dict_with_data, sort_keys=False)
-        with open(file_path, 'w') as f:
-            f.write(json_with_data)
-
-        self.logger.info('Data saved to {}.'.format(file_path))
+        import json
+        with open(path + filename + '.json', 'w') as outfile:
+            json.dump(dictionary, outfile)
+        logger.info('Calculated data written to %s' % filename + '.json')
