@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98379a85-3cb4-4c58-b4f0-2792ae382b94" name="Default Changelist" comment="Finished Unit Testing" />
+    <list default="true" id="98379a85-3cb4-4c58-b4f0-2792ae382b94" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/doctrees/environment.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/doctrees/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/_sources/index.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/genindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/searchindex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/code.rst" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/code.rst" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +28,11 @@
     <session id="1727621879">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.3" value="3" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -36,21 +46,24 @@
         <counts>
           <entry key="HRM_SignalProcess" value="135" />
           <entry key="Python Console" value="18" />
-          <entry key="py" value="4773" />
-          <entry key="txt" value="893" />
+          <entry key="py" value="5150" />
+          <entry key="rst" value="158" />
+          <entry key="txt" value="928" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="893" />
-          <entry key="Python" value="4926" />
+          <entry key="PLAIN_TEXT" value="928" />
+          <entry key="Python" value="5303" />
+          <entry key="ReST" value="158" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="HRM_SignalProcess" value="2" />
           <entry key="json" value="4" />
-          <entry key="py" value="24" />
+          <entry key="py" value="26" />
+          <entry key="rst" value="2" />
           <entry key="test_ReadData" value="1" />
           <entry key="txt" value="4" />
         </counts>
@@ -59,26 +72,14 @@
         <counts>
           <entry key="JSON" value="4" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="27" />
+          <entry key="Python" value="29" />
+          <entry key="ReST" value="2" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/HRM_main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -105,7 +106,10 @@
         <option value="$PROJECT_DIR$/SignalProcess.py" />
         <option value="$PROJECT_DIR$/test_SignalProcess.py" />
         <option value="$PROJECT_DIR$/ReadData.py" />
+        <option value="$PROJECT_DIR$/sphinx/conf.py" />
+        <option value="$PROJECT_DIR$/sphinx/index.rst" />
         <option value="$PROJECT_DIR$/HRM_main.py" />
+        <option value="$PROJECT_DIR$/sphinx/code.rst" />
       </list>
     </option>
   </component>
@@ -115,8 +119,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="439" />
+    <option name="y" value="561" />
     <option name="width" value="1294" />
     <option name="height" value="1407" />
   </component>
@@ -134,6 +139,11 @@
               <item name="bme590hrm" type="b2602c69:ProjectViewProjectNode" />
               <item name="bme590hrm" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bme590hrm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bme590hrm" type="462c0819:PsiDirectoryNode" />
+              <item name="sphinx" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -150,128 +160,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alanr\PycharmProjects\bme590hrm" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/HRM_main.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ReadData.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/CODEOWNERS</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/DataIO_log.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/SignalProcess.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/test_ReadData.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/test_SignalProcess.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/test_data1.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/test_data12.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/test_data13.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/test_data2.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/test_data3.json</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -578,7 +466,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540604524428</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="update docstrings for main">
+      <created>1540608288682</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1540608288682</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -614,9 +509,9 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <frame x="439" y="561" width="1294" height="1407" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10294118" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21150729" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -646,7 +541,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add test file folder" />
     <MESSAGE value="lost DataIO branch, Change data Stucture to class" />
     <MESSAGE value="add logging error if error occur" />
     <MESSAGE value="error in read data" />
@@ -671,18 +565,13 @@
     <MESSAGE value="Fixed issue #7 logging info" />
     <MESSAGE value="add unit test for voltage extremes" />
     <MESSAGE value="Finished Unit Testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished Unit Testing" />
+    <MESSAGE value="update docstrings for main" />
+    <option name="LAST_COMMIT_MESSAGE" value="update docstrings for main" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test_data/test_ReadData" />
     <entry file="file://$PROJECT_DIR$/PeakDetection.py" />
-    <entry file="file://$PROJECT_DIR$/test_dataIO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test_dataIO.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pep8.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1666">
@@ -694,25 +583,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HRM_SignalProcess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EcgLog.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/HRM_SignalProcess" />
+    <entry file="file://$PROJECT_DIR$/EcgLog.txt" />
     <entry file="file://$PROJECT_DIR$/DataIO_log.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -744,9 +619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -764,10 +636,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sphinx/code.rst">
+      <provider selected="true" editor-type-id="restructured-text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sphinx/index.rst">
+      <provider selected="true" editor-type-id="restructured-text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sphinx/conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+          <folding>
+            <element signature="e#564#573#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HRM_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="799">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
