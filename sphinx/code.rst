@@ -2,6 +2,10 @@ Code Documnentation
 ===========================
 
 .. automodule:: SignalProcess
-    :members
+    :members:
+	
+.. automodule:: HRM_main
+    :members:	
+
 .. automodule:: ReadData
-    :members
+    :members:	
