@@ -1,0 +1,4 @@
+INFO 10/26/2018 09:43:26 PM Reading of test_data13.csvwas successful from %sC:\Users\alanr\PycharmProjects\bme590hrm\test_data\test_data13.csv
+INFO 10/26/2018 09:43:26 PM Autocorrelation Successful
+INFO 10/26/2018 09:43:26 PM get autocorr interval successful
+INFO 10/26/2018 09:43:26 PM Calculated data written to test_data13.csv.json
