@@ -1,7 +1,7 @@
 # bme590hrm
 BME 590 Heart Rate Monitor
 
-[![Build Status](https://travis-ci.com/registera13/bme590hrm.srv?branch=master)](https://travis-ci.com/registera13/bme590hrm)
+[![Build Status](https://travis-ci.com/registera13/bme590hrm.svg?branch=master)](https://travis-ci.com/registera13/bme590hrm)
 
 #introduction
 This is a project for BME 590 Medical Device Development class. The goal of this project is to analyze an ECG signal in a .cvs file and
