@@ -12,6 +12,8 @@ compute mean heart rate BPM, maximum and  minimum voltage, duration of ECG, numb
 This program contain 3 important files ReadData.py, SignalPorcess.py, and HRM_main which is a scripted program that calls 
 the function in the other 2 files
 
+website documentation = https://registera13.github.io/bme590hrm/
+
 
 # Instruction for use the program
 1) all .csv files should be in test_data folder for the program to call them
