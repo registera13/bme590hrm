@@ -70,13 +70,13 @@ class DataIO:
             logging.info('Reading of %s' % self.filename + 'was successful from %s' + self.fullfolderpath)
 
 
-        #plt.title("CVS Heart Rate Signal")
-        #plt.plot(tempTime,tempVolt)
-        #plt.show()
+        # plt.title("CVS Heart Rate Signal")
+        # plt.plot(time,voltage)
+        # plt.show()
 
 
 if __name__ == '__main__':
-    Inputdata= DataIO("test_data1.csv")
+    Inputdata= DataIO("test_data2.csv")
     Inputdata.read_data()
     #print(Inputdata.time)
     #print(Inputdata.voltage)
