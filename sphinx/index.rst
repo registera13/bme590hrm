@@ -10,6 +10,8 @@ Welcome to bme590hrm's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   code
+
 
 
 Indices and tables
