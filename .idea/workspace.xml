@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98379a85-3cb4-4c58-b4f0-2792ae382b94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/doctrees/environment.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/doctrees/index.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/_sources/index.rst.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/_build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/_build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sphinx/code.rst" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/code.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sphinx/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/sphinx/index.rst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +20,11 @@
     <session id="1727621879">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="3" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -79,7 +71,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -120,8 +112,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="439" />
-    <option name="y" value="561" />
+    <option name="x" value="901" />
+    <option name="y" value="463" />
     <option name="width" value="1294" />
     <option name="height" value="1407" />
   </component>
@@ -509,9 +501,9 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="439" y="561" width="1294" height="1407" extended-state="0" />
+    <frame x="901" y="463" width="1294" height="1407" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21150729" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21474878" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -646,9 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-          <folding>
-            <element signature="e#564#573#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,9 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
           <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
